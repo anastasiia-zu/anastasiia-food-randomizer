@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import React from 'react'
+import AddWidget from './add-widget';
 
 const Navbar = () => {
   return (
-    <nav className=''>
-      <ul className='flex gap-2'>
+    <nav className='w-full'>
+      <ul className='flex justify-between'>
          <li>
             <Link href="/">Logo</Link>
          </li>
@@ -17,9 +18,7 @@ const Navbar = () => {
          <li>
             <Link href="/add-recipe">Add recipe</Link>
          </li>
-         <li>
-            <Link href="/log-in">Log in</Link>
-         </li>
+         <AddWidget/>
       </ul>
    </nav>
   )
