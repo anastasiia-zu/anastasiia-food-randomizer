@@ -110,59 +110,85 @@ const RecipeForm = () => {
    }
 
   return (
-   <form className='flex flex-col gap-4 max-w-3xl mx-auto py-8' onSubmit={handleSubmit}>
+   <form 
+   className='bg-white max-w-2xl w-full mx-auto mt-10 p-8 rounded-3xl shadow-md flex flex-col gap-6'
+   onSubmit={handleSubmit}
+   >
       <div className='flex flex-col'>
-         <label>Title</label>
+         <label className="text-sm font-semibold mb-1">Recipe Title</label>
          <input
-         className='border border-black p-2'
+         className='border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-300 text-sm'
          type='text'
          value={title}
          onChange={e => setTitle(e.target.value)}
+         placeholder="Enter recipe title"
          />
       </div>
 
       <div className='flex flex-col'> 
-         <label>Description</label>
+         <label className="text-sm font-semibold mb-1">Description</label>
          <input
-         className='border border-black p-2'
+         className='border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-300 text-sm resize-none'
          type='text'
          value={description}
          onChange={e => setDescription(e.target.value)}
+         placeholder="Enter recipe description"
          />
       </div>
 
-      <div className='flex flex-col'>
-         <label>Upload image</label>
-         <input
-         type='file'
-         accept='image/*'
+      <div className="flex flex-col">
+      <label className="text-sm font-semibold mb-2">Upload Image</label>
+      <input
+         id="image-upload"
+         type="file"
+         accept="image/*"
          onChange={hangleImageChange}
+         className="hidden"
+      />
+      <label
+         htmlFor="image-upload"
+         className="inline-block w-fit cursor-pointer bg-purple-300 text-white font-medium px-4 py-2 rounded-full hover:bg-purple-400 transition text-sm"
+      >
+         Choose Image
+      </label>
+      {previewImage && (
+         <Image
+            src={previewImage}
+            alt="preview"
+            width={48}
+            height={48}
+            className="mt-4 w-48 h-48 object-cover rounded-xl border"
          />
-         {previewImage && (<Image src={previewImage} alt='preview' width={48} height={48} className='mt-2 w-48 h-48 object-cover border'/>)}
+      )}
       </div>
 
-      <div className='flex items-end gap-4'>
-         <div className='flex flex-col'> 
-            <label>Ingredient</label>
+      <div className='flex flex-wrap items-end gap-4'>
+         <div className='flex flex-col flex-1 min-w-[200px]'> 
+            <label className="text-sm font-semibold mb-1">Ingredient</label>
             <input
-            className='border border-black p-2'
+            className='border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300'
             type='text'
             value={ingredient}
-            onChange={e => setIngredient(e.target.value)}
+            onChange={(e) => setIngredient(e.target.value)}
+            placeholder="Ingredient name"
             />
          </div>
-         <div className='flex flex-col'>
-            <label>Proportions</label>
+         <div className='flex flex-col w-[110px]'>
+            <label className="text-sm font-semibold mb-1">Proportions</label>
             <input
-            className='border border-black p-2'
+            className='border border-gray-300 rounded-full px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300'
             type='text'
             value={proportions}
-            onChange={e => setProportions(e.target.value)}
+            onChange={(e) => setProportions(e.target.value)}
+            placeholder="Proportion"
             />
          </div>
-         <div className='flex flex-col'> 
-            <label>Measure</label>
-            <select className='border border-black p-2' onChange={e => setMeasure(e.target.value)}>
+         <div className='flex flex-col w-[130px]'> 
+            <label className="text-sm font-semibold mb-1">Measure</label>
+            <select 
+            className='border border-gray-300 rounded-full px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300' 
+            onChange={e => setMeasure(e.target.value)}
+            >
                <option value={'spoons'}>
                   spoons
                </option>
@@ -178,14 +204,20 @@ const RecipeForm = () => {
             </select>
          </div>
 
-         <button className='bg-green-400 text-white px-4 py-2' type='button' onClick={addIngredient}>Add ingredient</button>
+         <button 
+         className='bg-purple-300 hover:bg-purple-400 transition text-white px-4 py-2 rounded-full text-sm' 
+         type='button' 
+         onClick={addIngredient}
+         >
+            Add ingredient
+         </button>
       </div>
 
       <div className='flex flex-col gap-2'>
          <h3 className='text-xl font-semibold'>
          Ingredients list:
          </h3>
-         <ul className='flex flex-col gap-4'>
+         <ul className='flex flex-col gap-1 text-sm list-disc pl-5 text-gray-700'>
             {allIngredients.map((item, index) => (
                <li key={index}>{item.amount} {item.unit} of {item.name}</li>
             ))}
@@ -193,11 +225,11 @@ const RecipeForm = () => {
       </div>
 
          <button 
-         className='bg-green-400 text-white px-4 py-2' 
+         className='w-full bg-purple-300 text-white py-3 rounded-full font-medium hover:bg-purple-400 transition disabled:opacity-50' 
          type='submit' 
          disabled={loading}
          >
-            {loading? "Loading..." : "Submit"}
+            {loading? "Loading..." : "Submit Recipe"}
          </button>
    </form>
   )

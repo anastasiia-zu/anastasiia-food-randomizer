@@ -57,47 +57,59 @@ const AuthForm = ({authFormType}: {authFormType: string }) => {
    }
 
   return (
-    <div className='max-w-md mx-auto py-10'>
-      <form className='bg-white p-6 shadow-md' onSubmit={handleSubmit}>
-         <h2 className='text-2xl font-semibold mb-6'> 
-            {authFormType === 'register' ? 'Register' : 'Log in'} 
+      <div className="max-w-md mx-auto py-16">
+      <form
+         className="bg-white p-8 rounded-3xl shadow-md w-full flex flex-col gap-5"
+         onSubmit={handleSubmit}
+      >
+         <h2 className="text-2xl font-bold text-gray-900">
+            {authFormType === 'register' ? 'Create a New Account' : 'Log In to Your Account'}
          </h2>
 
          {authFormType === 'register' && (
-            <div className='flex flex-col mb-4'> 
-               <label>Name</label>
-               <input 
-               className='border border-black p-2'
-               type='text'
+            <div className="flex flex-col">
+            <label className="text-sm font-medium mb-1">Username</label>
+            <input
+               className="border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300"
+               type="text"
+               placeholder="Enter your username"
                value={name}
-               onChange={e => setName(e.target.value)}
-               />
+               onChange={(e) => setName(e.target.value)}
+            />
             </div>
-         )} 
+         )}
 
-         <div className='flex flex-col mb-4'> 
-            <label>Email</label>
-            <input 
-            className='border border-black p-2'
-            type='email'
+         <div className="flex flex-col">
+            <label className="text-sm font-medium mb-1">Email</label>
+            <input
+            className="border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300"
+            type="email"
+            placeholder="Enter your email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             />
          </div>
-         <div className='flex flex-col mb-4'> 
-            <label>Password</label>
-            <input 
-            className='border border-black p-2'
-            type='password'
+
+         <div className="flex flex-col">
+            <label className="text-sm font-medium mb-1">Password</label>
+            <input
+            className="border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300"
+            type="password"
+            placeholder="Enter your password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             />
          </div>
-         <button className='bg-green-400 text-white px-4 py-2 disabled:bg-gray-400' type='submit' disabled={loading}>
-            {loading ? 'processing...' : 'submit'}
+
+         <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-purple-300 text-white py-3 rounded-full font-medium text-sm hover:bg-purple-400 transition disabled:opacity-50"
+         >
+            {loading ? 'Processing...' : authFormType === 'register' ? 'Register' : 'Log In'}
          </button>
       </form>
-    </div>
+      </div>
   )
 }
 

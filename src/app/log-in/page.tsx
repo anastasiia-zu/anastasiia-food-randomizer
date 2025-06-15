@@ -6,7 +6,7 @@ export default function LogIn() {
   return (
     <div className='text-center'>
       <AuthForm authFormType="Log-In"/>
-      <Link className='text-blue-500 text-sm' href='/sign-up'> You dont have account? Sign up here</Link>
+      <Link className='text-purple-800 text-sm hover:underline hover:text-purple-900 transition' href='/sign-up'> Don&apos;t have an account? Sign up here</Link>
     </div>
   )
 }

@@ -52,35 +52,35 @@ const RandomRecipe = () => {
    };
 
   return (
-   <div className='max-w-xl mx-auto mt-10 text-center'>
+   <div className='flex flex-col items-center mt-10'>
       <button 
       onClick={handleShowRandom} 
-      className='mx-auto mt-6 bg-purple-300 text-white font-semibold px-6 py-3 rounded-full hover:bg-purple-400 transition duration-300 disabled:opacity-50' 
+      className='bg-purple-400 text-white font-semibold px-6 py-3 rounded-full hover:bg-purple-500 transition mb-10' 
       disabled={loading || recipes.length === 0}
       >
          {loading? "Loading..." : "Get a Random Recipe"}
       </button>
 
       {randomRecipe && (
-         <div className='bg-yellow-500 shadow-md rounded p-4 border'>
+         <div className='w-full max-w-xl bg-white shadow-lg rounded-3xl p-6 border border-gray-100 text-center'>
             <h2 className='text-2xl font-bold mb-2'>
                {randomRecipe.title}
             </h2>
             {randomRecipe.imageURL && (
                <Image 
-               width={500}
-               height={300}
+               width={600}
+               height={400}
                src={randomRecipe.imageURL}
                alt={randomRecipe.title}
-               className='w-full h-64 object-cover rounded mb-4'/>
+               className='w-full h-64 object-cover rounded-2xl mb-4'/>
             )}
-            <p className='mb-3 text-gray-700'>
+            <p className='mb-4 text-gray-700 text-base'>
                {randomRecipe.description}
             </p>
             <h3 className='text-lg font-semibold mb-2'>
                Ingredients:
             </h3>
-            <ul className='list-disc pl-5 text-left'>
+            <ul className='ext-left text-sm text-gray-600 list-disc pl-5'>
                {randomRecipe.allIngredients.map((ing, index) => (
                   <li key={index}>{ing.amount} {ing.unit} of {ing.name}</li>
                ))}
