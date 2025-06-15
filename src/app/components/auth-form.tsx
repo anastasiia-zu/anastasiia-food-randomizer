@@ -1,7 +1,7 @@
 "use client"
 
 import { signIn, useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 const AuthForm = ({authFormType}: {authFormType: string }) => {
@@ -12,6 +12,7 @@ const AuthForm = ({authFormType}: {authFormType: string }) => {
    const [loading, setLoading] = useState(false);
 
    const {status} = useSession();
+   const router = useRouter();
 
 
    const handleSubmit = async (e: React.FormEvent) => {
@@ -40,7 +41,7 @@ const AuthForm = ({authFormType}: {authFormType: string }) => {
             if (result?.error) {
                alert(result.error);
             } else { 
-               return redirect('/add-recipe')
+               router.push('/add-recipe');
             }
          } 
       } catch (err) {
@@ -52,7 +53,7 @@ const AuthForm = ({authFormType}: {authFormType: string }) => {
    }
 
    if (status === 'authenticated') {
-      return redirect('/add-recipe');
+      router.push('/add-recipe');
    }
 
   return (
