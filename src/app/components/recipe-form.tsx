@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 type Ingredient = {
@@ -17,13 +17,17 @@ const RecipeForm = () => {
    const [description, setDescription] = useState<string>('');
    const [ingredient, setIngredient] = useState<string>('');
    const [proportions, setProportions] = useState<string>('');
-   const [allIngredients, setAllIngredients] = useState<Ingredient[]>([]);
    const [measure, setMeasure] = useState<string>('spoons');
+
+   const [allIngredients, setAllIngredients] = useState<Ingredient[]>([]);
+
    const [image, setImage] = useState<File | null>(null);
    const [previewImage, setPreviewImage] = useState<string | null>(null);
 
+   const [loading, setLoading] = useState<boolean>(false);
+
    const {status} = useSession();
-   
+   const router = useRouter();
 
    function addIngredient() {
       console.log(`${measure}, ${ingredient}, ${proportions}`)
@@ -53,12 +57,60 @@ const RecipeForm = () => {
       }
    }
 
+   const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+
+      if (!image) {
+         // change in future to react hot tost 
+         alert("please, select an image");
+         return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", image);
+
+      try {
+         const res = await fetch("/api/upload", {
+            method: "POST",
+            body: formData,
+         });
+
+         const data = await res.json();
+
+         if (!res.ok) {
+            throw new Error(data.error || "uploading failed");
+         };
+
+         console.log("upload image url:", data.url);
+
+         setLoading(true);
+
+         const recipe = await fetch("/api/recipes", {
+            method: "POST",
+            body: JSON.stringify({
+               title, 
+               description, 
+               allIngredients, 
+               imageURL: data.url,
+            }),
+         });
+
+         if (recipe.ok) {
+         setLoading(false);
+         router.push("/");
+         };
+      } catch (error) {
+         setLoading(false);
+         console.error("failed to add recipe", error);
+      };
+   };
+
    if (status === 'unauthenticated') {
-      return redirect('/log-in');
+      router.push('/log-in');
    }
 
   return (
-   <form className='flex flex-col gap-4 max-w-3xl mx-auto py-8'>
+   <form className='flex flex-col gap-4 max-w-3xl mx-auto py-8' onSubmit={handleSubmit}>
       <div className='flex flex-col'>
          <label>Title</label>
          <input
@@ -139,6 +191,14 @@ const RecipeForm = () => {
             ))}
          </ul>
       </div>
+
+         <button 
+         className='bg-green-400 text-white px-4 py-2' 
+         type='submit' 
+         disabled={loading}
+         >
+            {loading? "Loading..." : "Submit"}
+         </button>
    </form>
   )
 }
