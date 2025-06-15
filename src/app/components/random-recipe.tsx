@@ -55,10 +55,10 @@ const RandomRecipe = () => {
    <div className='max-w-xl mx-auto mt-10 text-center'>
       <button 
       onClick={handleShowRandom} 
-      className='bg-purple-600 text-white px-4 py-2 rounded mb-6' 
+      className='mx-auto mt-6 bg-purple-300 text-white font-semibold px-6 py-3 rounded-full hover:bg-purple-400 transition duration-300 disabled:opacity-50' 
       disabled={loading || recipes.length === 0}
       >
-         {loading? "loading" : "show random recipe"}
+         {loading? "Loading..." : "Get a Random Recipe"}
       </button>
 
       {randomRecipe && (
