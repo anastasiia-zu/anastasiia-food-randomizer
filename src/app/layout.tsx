@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "./components/header";
-import AuthProvider from "./components/auth-provider";
+import Header from "../components/header";
+import AuthProvider from "../components/auth-provider";
 
 const inter = Inter({
    subsets: ['latin'] 
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
+      <body className={`${inter.className} antialiased`}>
          <AuthProvider>
             <main className="max-w-7xl mx-auto px-4 py-8">
                <Header/>

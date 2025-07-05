@@ -1,4 +1,4 @@
-import RandomRecipe from "./components/random-recipe";
+import RandomRecipe from "../components/random-recipe";
 
 export default function Home() {
   return (

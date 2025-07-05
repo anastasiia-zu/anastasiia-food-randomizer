@@ -1,5 +1,5 @@
 import React from 'react'
-import AuthForm from '../components/auth-form'
+import AuthForm from '../../components/auth-form'
 import Link from 'next/link'
 
 export default function LogIn() {

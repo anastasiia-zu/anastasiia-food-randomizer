@@ -2,8 +2,8 @@
 import NextAuth, { Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { connectToDatabase } from "@/app/lib/mongoose";
-import { User } from "@/app/models/User";
+import { connectToDatabase } from "@/lib/mongoose";
+import { User } from "@/models/User";
 import { UserTypes } from "../../../../../types/types";
 import { JWT } from "next-auth/jwt";
 
