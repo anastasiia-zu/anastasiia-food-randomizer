@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase } from "@/app/lib/mongoose";
-import { Recipe } from "@/app/models/Recipe";
+import { connectToDatabase } from "@/lib/mongoose";
+import { Recipe } from "@/models/Recipe";
 
 export async function POST(req: NextRequest) {
    try {

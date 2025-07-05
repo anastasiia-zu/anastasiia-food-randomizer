@@ -7,3 +7,15 @@ export interface UserTypes {
    isAdmin?: boolean;
    imageUrl?: string;
 };
+
+export interface RecipeTypes {
+   _id?: string;
+   title: string;
+   description: string;
+   allIngredients: {
+      name: string;
+      amount: string;
+      unit: string;
+   }[];
+   imageURL: string;
+};
