@@ -11,8 +11,8 @@ const AddWidget = () => {
       <>
          {session.status === 'authenticated' ? (
             <>
-            <li> <Link href={"/profile"} className=''> profile </Link> </li>
-            <li onClick={() => signOut()}> exit </li>
+            <li> <Link href={"/profile"} className=''> Profile </Link> </li>
+            <li onClick={() => signOut()}> Exit </li>
             </>
          ) : (
            <li> <Link href={"/log-in"}>Log in</Link> </li>

@@ -14,7 +14,6 @@ const AuthForm = ({authFormType}: {authFormType: string }) => {
    const {status} = useSession();
    const router = useRouter();
 
-
    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault(); 
       setLoading(true);
