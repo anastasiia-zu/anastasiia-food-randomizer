@@ -1,7 +1,9 @@
 "use client"
 
+import { addRecipe } from '@/store/recentlyViewedSlice';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 
 type Ingredient = {
    name: string;
@@ -21,6 +23,7 @@ const RandomRecipe = () => {
    const [recipes, setRecipes] = useState<Recipe[]>([]);
    const [randomRecipe, setRandomRecipe] = useState<Recipe | null>(null);
    const [loading, setLoading] = useState<boolean>(false);
+   const dispatch = useDispatch();
 
    const fetchRecipes = async () => {
       setLoading(true);
@@ -47,12 +50,15 @@ const RandomRecipe = () => {
       }
 
       const randomIndex = Math.floor(Math.random() * recipes.length);
+      const selectedRecipe = recipes[randomIndex];
 
-      setRandomRecipe(recipes[randomIndex]);
+      setRandomRecipe(selectedRecipe);
+
+      dispatch(addRecipe(selectedRecipe));
    };
 
   return (
-   <div className='flex flex-col items-center mt-10'>
+   <div className='flex flex-col items-center mt-10 min-h-[500px]'>
       <button 
       onClick={handleShowRandom} 
       className='bg-purple-400 text-white font-semibold px-6 py-3 rounded-full hover:bg-purple-500 transition mb-10' 

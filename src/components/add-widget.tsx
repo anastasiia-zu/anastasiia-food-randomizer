@@ -3,6 +3,8 @@
 import React from 'react'
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
+import { LuHeart } from "react-icons/lu";
+
 
 const AddWidget = () => {
   const session = useSession();
@@ -11,7 +13,7 @@ const AddWidget = () => {
       <>
          {session.status === 'authenticated' ? (
             <>
-            <li> <Link href={"/profile"} className=''> Profile </Link> </li>
+            <li> <Link href={"/profile"} className=''> <LuHeart className='w-7 h-7 text-purple-500'/> </Link> </li>
             <li onClick={() => signOut()}> Exit </li>
             </>
          ) : (
