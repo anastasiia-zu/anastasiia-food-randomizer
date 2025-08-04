@@ -8,14 +8,20 @@ export interface UserTypes {
    imageUrl?: string;
 };
 
+export interface IngredientTypes {
+   name: string;
+   amount: string;
+   unit: string;
+};
+
 export interface RecipeTypes {
    _id?: string;
    title: string;
    description: string;
-   allIngredients: {
-      name: string;
-      amount: string;
-      unit: string;
-   }[];
+   allIngredients: IngredientTypes[];
    imageURL: string;
+};
+
+export interface RecentlyViewedTypes {
+   recipes: RecipeTypes[];
 };
